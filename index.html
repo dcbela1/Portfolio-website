@@ -8,109 +8,188 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" />
 <style>
 body{
-margin:0; font-family:Arial, sans-serif; line-height:1.6; background:#fdfdfd; color:#333;
+  margin:0; font-family:Arial, sans-serif; line-height:1.6; background:#fdfdfd; color:#333;
 }
-header{background:#222; color:#fff; padding:1rem; text-align:center;}
+header{
+  background:#222; color:#fff; padding:1rem; text-align:center;
+}
 header h1{margin:0; font-size:1.8rem;}
+/* Profile Picture */
+.profile-pic {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+  display: block;
+  margin: 0 auto 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.profile-pic:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+}
 nav{margin-top:.5rem;}
-nav a{color:#fff; margin:0 .5rem; text-decoration:none; font-weight:bold;}
+nav a{
+  color:#fff; margin:0 .5rem; text-decoration:none; font-weight:bold;
+  position: relative; transition: color 0.3s ease;
+}
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%; height: 2px;
+  background: #0194fe;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+nav a:hover{color:#0194fe;}
+nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
 section{padding:2rem; max-width:900px; margin:auto;}
-h2{margin-top:0;margin-bottom:10px; text-align:center;font-size:1em;}
-  p {text-align:center;}
-.skills, .projects{display:grid; grid-template-columns:repeat(auto-fit,minmax(20px,1fr)); gap:5px;}
-.skills .card{background:#fafafa; border:1px solid #eeeeee; padding:25%; border-radius:50%; text-align:center; box-shadow:0 2px 3px rgba(0,0,0,0.1); align-items:center;justify-content-center; width:100%; max-width:50px;height:100%; max-height:50px;}
-.skills .card img{max-width:100%; border-radius:4px;}
-.skills .card i{font-size:2rem; margin-bottom:.5rem; color:#555;}
-.projects .card{background:#fafafa; padding:25%; border-radius:5px; text-align:center; width:100%; max-width:145px;height:100%; max-height:145px;}
-.projects .card img{max-width:100%; border-radius:4px;}
-.projects .card i{font-size:2rem; margin-bottom:.5rem; color:#555;}
+h2{margin-top:0;margin-bottom:10px; text-align:center;font-size:1.2em;}
+p{text-align:center;}
+/* Skills */
+.skills{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:10px;
+  margin:1rem auto 0;
+}
+.skills .card{
+  background:#fafafa; border:1px solid #eee; border-radius:999px;
+  padding:.6rem .9rem; text-align:center;
+  box-shadow:0 2px 3px rgba(0,0,0,.06);
+  display:flex; align-items:center; justify-content:center; gap:.5rem;
+  font-size:.95rem;
+}
+.skills .card i{font-size:1rem; color:#555;}
+/* Projects */
+.projects{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:14px;
+}
+.projects .card{
+  background:#fafafa; border:1px solid #eee; border-radius:10px;
+  padding:1rem; text-align:center;
+  box-shadow:0 2px 5px rgba(0,0,0,.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+.projects .card:hover{
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  background:#ffffff;
+}
+.projects .card i{font-size:1.4rem; color:#555; margin-bottom:.4rem;}
+.projects .card h3{margin:.3rem 0 .4rem; font-size:1rem;}
+.projects .card p{font-size:.92rem; line-height:1.35;}
+.projects .card a{display:inline-block; margin-top:.5rem; text-decoration:none;}
 form{display:grid; gap:.5rem;}
-.projects .card:hover, input:hover {background:#e5f2fd;}
-input, textarea{padding:.6rem; border:1px solid #f2f2f2; border-radius:7px;background:#fafafa; }
-button{padding:.7rem 1.2rem; background-color:#0194fe; color:#fff; border:none; border-radius:4px; font-weight:bold; cursor:pointer;min-width:250px;margin-left:auto; margin-right:auto;}
-  button:hover {background-color:#0085e4;}
+input, textarea{
+  padding:.6rem; border:1px solid #f2f2f2; border-radius:7px;background:#fafafa;
+}
+button{
+  padding:.7rem 1.2rem; background-color:#0194fe; color:#fff; border:none; border-radius:4px; font-weight:bold; cursor:pointer;min-width:250px;margin-left:auto; margin-right:auto;
+}
+button:hover{background-color:#0085e4;}
 footer{text-align:center; padding:1rem; background:#222; color:#fff; margin-top:2rem;}
 </style>
 </head>
 <body>
 <header>
-<h1><i class="fa-solid fa-user"></i> Michael Hines</h1>
-<nav>
-<a href="#about"><i class="fa-solid fa-circle-info"></i> About</a>
-<a href="#skills"><i class="fa-solid fa-code"></i> Skills</a>
-<a href="#projects"><i class="fa-solid fa-diagram-project"></i> Projects</a>
-<a href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a>
-</nav>
+  <img class="profile-pic" src="profileme.jpg" alt="Michael Hines headshot">
+  <h1>Michael Hines</h1>
+  <nav>
+    <a href="#about"><i class="fa-solid fa-circle-info"></i> About</a>
+    <a href="#skills"><i class="fa-solid fa-code"></i> Skills</a>
+    <a href="#projects"><i class="fa-solid fa-diagram-project"></i> Projects</a>
+    <a href="#contact"><i class="fa-solid fa-envelope"></i> Contact</a>
+  </nav>
 </header>
-
 
 <main>
 <section id="about">
-<h2><i class="fa-solid fa-circle-info"></i> About Me</h2>
-<p>Hi, I’m Michael. I’m learning web development and putting my projects here as I go. This site is a simple way for me to share what I’m working on, track my progress, and show the skills I’m picking up along the way.</p>​ 
+  <h2><i class="fa-solid fa-circle-info"></i> About Me</h2>
+  <p>
+    Hi, I’m Michael — a motivated learner and creative problem-solver with a passion for web development, design, and building digital projects from the ground up. 
+    I enjoy experimenting with HTML, CSS, and JavaScript to turn ideas into functional and visually appealing websites. 
+  </p>
+  <p>
+    Outside of coding, I’ve worked on projects involving property listing sites, email marketing campaigns, and crypto tracking tools. 
+    These experiences have helped me strengthen my skills in communication, organization, and creative design, while also showing me the importance of making technology both useful and easy to understand. 
+  </p>
+  <p>
+    My goal is to keep learning, refining my craft, and eventually create tools, sites, and resources that make an impact on people’s everyday lives. 
+    This portfolio is where I share my progress as I grow and push myself to the next level. 
+  </p>
 </section>
-
 
 <section id="skills">
-<h2><i class="fa-solid fa-code"></i> Skills</h2>
-<div class="skills">
-<div class="card"><i class="fa-brands fa-html5" style="color:#e34c26"></i><br>HTML5</div>
-<div class="card"><i class="fa-brands fa-css3-alt" style="color:#264de4"></i><br>CSS3</div>
-<div class="card"><i class="fa-brands fa-square-js" style="color:#f7df1e"></i><br>JavaScript</div>
-<div class="card"><i class="fa-solid fa-paintbrush" style="color:#ff7f50"></i><br>Creative Design</div>
-<div class="card"><i class="fa-brands fa-github" style="color:#333"></i><br>GitHub</div>
-</div>
+  <h2><i class="fa-solid fa-code"></i> Skills</h2>
+  <div class="skills">
+    <div class="card"><i class="fa-brands fa-html5" style="color:#e34c26"></i> HTML5</div>
+    <div class="card"><i class="fa-brands fa-css3-alt" style="color:#264de4"></i> CSS3</div>
+    <div class="card"><i class="fa-brands fa-square-js" style="color:#f7df1e"></i> JavaScript</div>
+    <div class="card"><i class="fa-solid fa-paintbrush" style="color:#ff7f50"></i> Creative Design</div>
+    <div class="card"><i class="fa-brands fa-github" style="color:#333"></i> Git & GitHub</div>
+    <div class="card"><i class="fa-solid fa-display"></i> Responsive Design</div>
+    <div class="card"><i class="fa-solid fa-pen-ruler"></i> Canva / Basic Figma</div>
+    <div class="card"><i class="fa-solid fa-envelope"></i> Email Marketing (Brevo)</div>
+    <div class="card"><i class="fa-solid fa-table"></i> Google Sheets / Excel</div>
+    <div class="card"><i class="fa-solid fa-pen-to-square"></i> Copywriting</div>
+  </div>
 </section>
-
 
 <section id="projects">
-<h2><i class="fa-solid fa-diagram-project"></i> Projects</h2>
-<div class="projects">
-<div class="card">
-<i class="fa-solid fa-book-open"></i>
-<h3>Story Page</h3>
-<p>A web page that combines text and visuals to tell a short story.</p>
-<a href="#" target="_blank"><i class="fa-solid fa-link"></i> Demo</a>
-</div>
-<div class="card">
-<i class="fa-solid fa-chart-line"></i>
-<h3>Crypto Tracker</h3>
-<p>A simple dashboard for visualizing coin growth and returns.</p>
-<a href="#" target="_blank"><i class="fa-brands fa-github"></i> Code</a>
-</div>
-<div class="card">
-<i class="fa-solid fa-clock"></i>
-<h3>Focus Timer</h3>
-<p>A minimalist countdown timer for study and work sessions.</p>
-<a href="#" target="_blank"><i class="fa-solid fa-link"></i> Demo</a>
-</div>
-</div>
+  <h2><i class="fa-solid fa-diagram-project"></i> Projects</h2>
+  <div class="projects">
+    <div class="card">
+      <i class="fa-solid fa-house"></i>
+      <h3>HiApartmentHomes – Landing Page</h3>
+      <p>Redesigned hero, trust badges, and FAQ for a property-listing site using mobile-first HTML/CSS.</p>
+      <a href="#" target="_blank"><i class="fa-solid fa-link"></i> View mockup</a>
+    </div>
+    <div class="card">
+      <i class="fa-solid fa-envelope-open-text"></i>
+      <h3>FlashFindsToday – Email Campaign</h3>
+      <p>Built a Brevo campaign with segments, copy, and basic style guide; tracked opens and CTR.</p>
+      <a href="#" target="_blank"><i class="fa-solid fa-link"></i> See outline</a>
+    </div>
+    <div class="card">
+      <i class="fa-solid fa-coins"></i>
+      <h3>Crypto ROI Tracker</h3>
+      <p>Sheet + JS helper that compares unrealized vs. realized gains and rent-safe withdrawals.</p>
+      <a href="#" target="_blank"><i class="fa-brands fa-github"></i> Code/Demo</a>
+    </div>
+  </div>
 </section>
 
-
 <section id="contact">
-<h2><i class="fa-solid fa-envelope"></i> Contact</h2>
-<form onsubmit="event.preventDefault(); alert('Message captured!'); this.reset();">
-<input type="text" placeholder="Your Name" required>
-<input type="email" placeholder="Your Email" required>
-<textarea placeholder="Your Message" required></textarea>
-<button type="submit"><i class="fa-solid fa-paper-plane"></i> Send</button>
-</form>
-<p style="margin-top:1rem;">
-<a href="https://github.com/" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a> |
-<a href="https://linkedin.com/" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-</p>
+  <h2><i class="fa-solid fa-envelope"></i> Contact</h2>
+  <form onsubmit="event.preventDefault(); alert('Message captured!'); this.reset();">
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea placeholder="Your Message" required></textarea>
+    <button type="submit"><i class="fa-solid fa-paper-plane"></i> Send</button>
+  </form>
+  <p style="margin-top:1rem;">
+    <a href="https://github.com/" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a> |
+    <a href="https://linkedin.com/" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+  </p>
 </section>
 </main>
 
-
 <footer>
-<p>© <span id="year"></span> Michael D. Hines Jr. | Built with HTML, CSS & <i class="fa-solid fa-heart" style="color:red"></i></p>
+  <p>© <span id="year"></span> Michael D. Hines Jr. | Built with HTML, CSS & <i class="fa-solid fa-heart" style="color:red"></i></p>
 </footer>
-
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 </body>
-</html> 
+</html>
